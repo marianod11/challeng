@@ -3,6 +3,7 @@ import "./index.css";
 import { useAppContext } from "../../context/appContext";
 import Logo from "../../assets/react.svg"
 
+
 export const Header = () => {
   const { connected, address, connectWallet, disconnectWallet } =
     useAppContext();
@@ -38,7 +39,9 @@ export const Header = () => {
             </span>
           </div>
         ) : (
-          <button onClick={connectWallet}>Conect Wallet</button>
+          <div>
+            <button onClick={connectWallet}>Conect Wallet</button>
+          </div>
         )}
       </div>
     </div>

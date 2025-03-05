@@ -13,6 +13,13 @@
     "@fortawesome/free-brands-svg-icons": "^6.7.1",
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@particle-network/auth-core-modal": "^1.5.2",
+    "@reown/appkit": "^1.6.9",
+    "@reown/appkit-adapter-wagmi": "^1.6.9",
+    "@reown/appkit-wallet-button": "^1.6.9",
+    "@reown/walletkit": "^1.2.1",
+    "@walletconnect/core": "^2.19.0",
+    "@walletconnect/utils": "^2.19.0",
     "@walletconnect/web3-provider": "^1.8.0",
     "axios": "^1.7.9",
     "ethers": "^6.13.5",
@@ -21,6 +28,7 @@
     "react-dom": "^18.3.1",
     "react-router": "^6.24.0",
     "react-router-dom": "^6.24.0",
+    "wagmi": "^2.14.12",
     "web3modal": "^1.9.12"
   },
   "devDependencies": {
