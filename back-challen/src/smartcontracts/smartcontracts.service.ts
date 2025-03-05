@@ -89,30 +89,6 @@ export class SmartcontractsService {
             throw new HttpException(`Failed to withdraw token: ${error.message}`, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    async getAvailableAndSoldTokens(): Promise<{ availableTokens: TokenList[]; soldTokens: TokenList[] }> {
-        try {
-            const tokenListRaw = await this.contract.getAllTokens.staticCall();
-            const tokens: TokenList[] = tokenListRaw.map((token: any) => ({
-                seller: token[0],
-                tokenName: token[1],
-                tokenSymbol: token[2],
-                tokenAddress: token[3],
-                price: token[4].toString(),
-                quantity: token[5].toString(),
-                sold: token[6],
-                withdrawn: token[7],
-                tokenId: token[8].toString(),
-            }));
-            const availableTokens = tokens.filter((token) => !token.sold);
-            const soldTokens = tokens.filter((token) => token.sold);
-
-            return { availableTokens, soldTokens };
-        } catch (error: any) {
-            throw new HttpException(`Failed to fetch tokens: ${error.message}`, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
     async getNonce(address: string) {
         try {
             const nonce = await this.contract.getNonce.staticCall(address);
@@ -122,24 +98,40 @@ export class SmartcontractsService {
         }
     }
 
-    async getTokenListUser(address: string) {
+    private mapTokenList(tokenListRaw: any[]): TokenList[] {
+        return tokenListRaw.map((token: any) => ({
+            seller: token[0],
+            tokenName: token[1],
+            tokenSymbol: token[2],
+            tokenAddress: token[3],
+            price: token[4].toString(),
+            quantity: token[5].toString(),
+            sold: token[6],
+            withdrawn: token[7],
+            tokenId: token[8].toString(),
+        }));
+    }
+
+    async getAvailableAndSoldTokens(): Promise<{ availableTokens: TokenList[]; soldTokens: TokenList[] }> {
         try {
-            const tokenListRaw = await this.contract.getUsersListTokens(address);
-            const tokens: TokenList[] = tokenListRaw.map((token: any) => ({
-                seller: token[0],
-                tokenName: token[1],
-                tokenSymbol: token[2],
-                tokenAddress: token[3],
-                price: token[4].toString(),
-                quantity: token[5].toString(),
-                sold: token[6],
-                withdrawn: token[7],
-                tokenId: token[8].toString(),
-            }));
-            return tokens;
+            const tokenListRaw = await this.contract.getAllTokens.staticCall();
+            const tokens = this.mapTokenList(tokenListRaw);
+            const availableTokens = tokens.filter((token) => !token.sold);
+            const soldTokens = tokens.filter((token) => token.sold);
+
+            return { availableTokens, soldTokens };
         } catch (error: any) {
             throw new HttpException(`Failed to fetch tokens: ${error.message}`, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
+    async getTokenListUser(address: string) {
+        try {
+            const tokenListRaw = await this.contract.getUsersListTokens(address);
+            return this.mapTokenList(tokenListRaw);
+        } catch (error: any) {
+            throw new HttpException(`Failed to fetch tokens: ${error.message}`, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+        
 }

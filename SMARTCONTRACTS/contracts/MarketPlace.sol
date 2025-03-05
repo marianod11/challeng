@@ -173,4 +173,15 @@ contract MarketPlace is EIP712 {
         return tokens;
 
     }
+
+    /// @notice Retrieves all tokens listed by a user.
+    /// @param _user Address of the user.
+    /// @return TokenList[] List of tokens.
+    function getUsersListTokens(address _user) public view returns (TokenList[] memory) {
+        TokenList[] memory tokens = new TokenList[](userTokenListIds[_user].length);
+        for (uint256 i = 0; i < userTokenListIds[_user].length; i++) {
+            tokens[i] = listTokens[userTokenListIds[_user][i]];
+        }
+        return tokens;
+    }
 }
