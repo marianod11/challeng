@@ -9,5 +9,4 @@ const MarketPlaceModule = buildModule("MarketPlaceModule", (m) => {
 
   return { marketPlace };
 });
-console.log(MarketPlaceModule)
 export default MarketPlaceModule;

@@ -4,9 +4,9 @@ This repository contains the smart contract called MarketPlace.sol, which contai
 There is also a test with two E2E cases, one with the flow with signature and another without signature. And a deployment script.
 
 
-### Address of the deployed contract on Sepolia = 0x7d51Ec4AB91eDC65C8bD4F49690F8eb7A6052035
+### Address of the deployed contract on Sepolia = 0xaE90099E50A8644634abB7c6958D8aB79F5BD63f
 
-### Url de Sepolia = https://sepolia.etherscan.io/address/0x7d51Ec4AB91eDC65C8bD4F49690F8eb7A6052035#code
+### Url de Sepolia = https://sepolia.etherscan.io/address/0xaE90099E50A8644634abB7c6958D8aB79F5BD63f#code
 
 
 ### USE
@@ -14,5 +14,5 @@ There is also a test with two E2E cases, one with the flow with signature and an
 - npx hardhat node
 - npx hardhat test
 - REPORT_GAS=true npx hardhat test
-- npx hardhat ignition deploy ./ignition/module/...
+- npx hardhat ignition deploy ./ignition/modules/<>
 ```
